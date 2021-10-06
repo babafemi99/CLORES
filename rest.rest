@@ -1,0 +1,88 @@
+
+### REGISTER
+POST  http://localhost:3000/api/admin/register
+content-type: application/json
+
+{
+    "first_name": "",
+    "last_name": "",
+    "email": "jj@jjz.com",
+    "password": "password",
+    "password_confirm": ""
+}
+
+### LOGIN
+POST http://localhost:3000/api/admin/login
+content-type: application/json
+
+{
+  "email": "pv@palace.com",
+  "password": "adigun"
+}
+
+### LOG OUT
+POST  http://localhost:3000/api/admin/logout
+
+### GET USER
+GET http://localhost:3000/api/ambassador/user
+
+### UPDATE PROFILE
+PUT   http://localhost:3000/api/admin/user/info
+content-type: application/json
+
+{
+    "first_name": "patrick",
+    "last_name": "viera",
+    "email": "pv@palace.com"
+}
+
+
+
+### CHANGE PASSWORD
+PUT   http://localhost:3000/api/admin/user/password
+content-type: application/json
+
+{
+    "password": "adigun",
+    "password_confirm": "adigun"
+}
+
+### GET AMBASSADORS
+GET http://localhost:3000/api/admin/ambassadors
+
+
+
+### GET PRODUCTS
+GET http://localhost:3000/api/admin/products
+
+
+### GET PRODUCTS
+GET http://localhost:3000/api/admin/users/3/links
+
+### GET ORDERS
+GET http://localhost:3000/api/admin/orders
+
+
+### GET PRODUCT FRONTEND
+GET http://localhost:3000/api/ambassador/products/frontend
+
+### GET PRODUCT BACKEND
+GET http://localhost:3000/api/ambassador/products/backend
+
+
+### PAGINATION
+GET http://localhost:3000/api/ambassador/products/backend?page=1
+
+
+### UPDATE PRODUCTS
+PUT http://localhost:3000/api/admin/products/7
+content-type: application/json
+
+### GET STATS
+GET http://localhost:3000/api/admin/stats
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+package routes
+
+import (
+	middlewears "clores-local/MiddleWears"
+	controllers "clores-local/controllers"
+
+	"github.com/gofiber/fiber/v2"
+)
+
+func Setup(app *fiber.App) {
+	api := app.Group("api")
+	admin := api.Group("admin")
+	admin.Post("register", controllers.Register)
+	admin.Post("login", controllers.Login)
+
+	adminAuthenticated := admin.Use(middlewears.IsAuthenticated)
+	adminAuthenticated.Get("user", controllers.GetUser)
+	adminAuthenticated.Post("logout", controllers.Logout)
+	adminAuthenticated.Put("user/info", controllers.UpdateUser)
+	adminAuthenticated.Put("user/password", controllers.UpdatePassword)
+	adminAuthenticated.Get("ambassadors", controllers.Ambassador)
+	adminAuthenticated.Post("products", controllers.CreateProduct)
+	adminAuthenticated.Get("products/", controllers.Product)
+	adminAuthenticated.Get("products/:id", controllers.GetProduct)
+	adminAuthenticated.Put("products/:id", controllers.UpdateProduct)
+	adminAuthenticated.Delete("products/:id", controllers.DeleteProduct)
+	adminAuthenticated.Get("users/:id/links", controllers.Link)
+	adminAuthenticated.Get("orders", controllers.Orders)
+
+	ambassador := api.Group("ambassador")
+	ambassador.Post("register", controllers.Register)
+	ambassador.Post("login", controllers.Login)
+	ambassador.Get("products/frontend", controllers.ProductsFrontEnd)
+	ambassador.Get("products/backend", controllers.ProductsBackend)
+
+	ambassadorAuthenticated := ambassador.Use(middlewears.IsAuthenticated)
+	ambassadorAuthenticated.Get("user", controllers.GetUser)
+	ambassadorAuthenticated.Post("logout", controllers.Logout)
+	ambassadorAuthenticated.Put("users/info", controllers.UpdateUser)
+	ambassadorAuthenticated.Put("users/password", controllers.UpdatePassword)
+	ambassadorAuthenticated.Post("links", controllers.CreateLink)
+	ambassadorAuthenticated.Get("stats", controllers.Stats)
+	ambassadorAuthenticated.Get("rankings", controllers.Rankings)
+
+	checkout := api.Group("checkout")
+
+	checkout.Get("links/:code", controllers.GetLink)
+	checkout.Post("orders", controllers.CreateOrder)
+	checkout.Post("orders/confirm", controllers.CompleteOrder)
+
+}
